@@ -14,13 +14,13 @@ namespace GenericExample
 
             var person = new List<Person>()
             {
-                new Person(){Id=1, Name="Pedro",Surname="Hurtado"},
+                new Person(){Id=1, Name="Pedro", Surname="Hurtado"},
                 new Person(){Id=2, Surname="Lopez"},
             };
 
             //Validate persons
             List<Generic> listGeneric = Generic.ToGeneric(person);
-
+            
             //insert into table(...) values (111,2)
             foreach (Generic generic in listGeneric)
             {
@@ -30,33 +30,10 @@ namespace GenericExample
                 sql.Append(generic.type.Name);
                 sql.Append(" (");
                 var properties = generic.type.GetProperties().ToList();
-                PropertyInfo property;            
-                    //Escribe las propiedades   
-                    for(int i = 0; i < properties.Count; i++)
-                    {
-
-                    property = properties.ElementAt(i);
-                    if (property.ReflectedType.FullName.Equals("GenericExample.Person"))
-                       {
-                        sql.Append(property.Name + ",");
-                        if (i == properties.Count - 1)
-                        {
-                            sql.Append(property + ")");
-                        }
-                      }
-                    }
-                    sql.Append(" Values (");
-                    for (int i = 0; i < properties.Count; i++)
-                    {
-                    property = properties.ElementAt(i);
-                    sql.Append(property.GetValue(generic.Obj) + ",");
-                        if (i == properties.Count - 1)
-                        {
-                            sql.Append(property + ")");
-                        }
-                 }
+                PropertyInfo property;
+                sql.Append(Generic.StringBuilderProperty(properties, sql));
+                sql.Append(Generic.StringBuilderValues(properties, sql,generic));
             }
         }
     }
-
 }

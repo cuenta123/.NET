@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,49 @@ namespace GenericExample
         public static List<Generic> ToGeneric(IEnumerable<Object> list)
         {
             return list.Select (c=> new Generic {Obj=c, type = c.GetType()}).ToList();
+        }
+
+        public static StringBuilder StringBuilderProperty(List<PropertyInfo> properties,StringBuilder sql)
+        {
+            if (sql != null && properties != null)
+            {
+                PropertyInfo property;
+                for (int i = 0; i < properties.Count; i++)
+                {
+                    property = properties.ElementAt(i);
+                    if (property.ReflectedType.FullName.Equals("GenericExample.Person"))
+                    {
+                        sql.Append(property.Name + ",");
+                        if (i == properties.Count - 1)
+                        {
+                            sql.Append(property + ")");
+                        }
+                    }
+                }
+                return sql;
+            } 
+             throw new Exception("La cadena o propiedad recibida es nula");
+        }
+
+        public static StringBuilder StringBuilderValues(List<PropertyInfo> properties, StringBuilder sql,Generic generic)
+        {
+            if (sql != null && properties!= null && generic!=null)
+            {
+                PropertyInfo property;
+                sql.Append(" Values (");
+                for (int i = 0; i < properties.Count; i++)
+                {
+                    property = properties.ElementAt(i);
+                    sql.Append(property.GetValue(generic.Obj) + ",");
+                    if (i == properties.Count - 1)
+                    {
+                        sql.Append(property + ")");
+                    }
+                }
+                return sql;
+            }
+
+            throw new Exception("La cadena o propiedad recibida es nula");
         }
     }
 }
