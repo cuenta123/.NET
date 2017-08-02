@@ -11,7 +11,7 @@ namespace GenericExample
     {
         public Object Obj {get; set;}
         public Type type{get; set;}
-
+        
         /// <summary>
         /// Convierte una lista de objetos a Object y devuelve
         /// </summary>
@@ -22,9 +22,10 @@ namespace GenericExample
             return list.Select (c=> new Generic {Obj=c, type = c.GetType()}).ToList();
         }
 
-        public static StringBuilder StringBuilderProperty(List<PropertyInfo> properties,StringBuilder sql)
+        public static StringBuilder StringBuilderProperty(List<PropertyInfo> properties)
         {
-            if (sql != null && properties != null)
+           var sql = new StringBuilder();
+            if ( properties != null)
             {
                 PropertyInfo property;
                 for (int i = 0; i < properties.Count; i++)
@@ -44,9 +45,10 @@ namespace GenericExample
              throw new Exception("La cadena o propiedad recibida es nula");
         }
 
-        public static StringBuilder StringBuilderValues(List<PropertyInfo> properties, StringBuilder sql,Generic generic)
+        public static StringBuilder StringBuilderValues(List<PropertyInfo> properties, Generic generic)
         {
-            if (sql != null && properties!= null && generic!=null)
+            var sql = new StringBuilder();
+            if (properties!= null && generic!=null)
             {
                 PropertyInfo property;
                 sql.Append(" Values (");

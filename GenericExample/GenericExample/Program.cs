@@ -11,7 +11,6 @@ namespace GenericExample
     {
         static void Main(string[] args)
         {
-
             var person = new List<Person>()
             {
                 new Person(){Id=1, Name="Pedro", Surname="Hurtado"},
@@ -20,19 +19,22 @@ namespace GenericExample
 
             //Validate persons
             List<Generic> listGeneric = Generic.ToGeneric(person);
-            
             //insert into table(...) values (111,2)
+            StringBuilder sql = new StringBuilder();
+            
+            var table = listGeneric.ElementAt(0).type.Name;
+            var properties = listGeneric.ElementAt(0).type.GetProperties().ToList();
+
+            sql.Append("Insert Into ");
+            sql.Append(table);
+            sql.Append(" (");            
+            sql.Append(Generic.StringBuilderProperty(properties));
+
             foreach (Generic generic in listGeneric)
             {
-                var table = generic.type.Name;
-                StringBuilder sql = new StringBuilder();
-                sql.Append("Insert Into ");
-                sql.Append(generic.type.Name);
-                sql.Append(" (");
-                var properties = generic.type.GetProperties().ToList();
                 PropertyInfo property;
-                sql.Append(Generic.StringBuilderProperty(properties, sql));
-                sql.Append(Generic.StringBuilderValues(properties, sql,generic));
+                //Escribe las propiedades               
+                sql.Append(Generic.StringBuilderValues(properties,generic));
             }
         }
     }
