@@ -17,7 +17,7 @@ namespace LinqExample2
 
             List<int> listB = new List<int>()
             {
-                1,2,3
+                2,3
             };
 
             //Method Sintax
