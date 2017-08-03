@@ -20,15 +20,12 @@ namespace GenericExample
             //Validate persons
             List<Generic> listGeneric = Generic.ToGeneric(person);
             //insert into table(...) values (111,2)
-            StringBuilder sql = new StringBuilder();
+          //  StringBuilder sql = new StringBuilder();
             
-            var table = listGeneric.ElementAt(0).type.Name;
-            var properties = listGeneric.ElementAt(0).type.GetProperties().ToList();
+            //var table = listGeneric.ElementAt(0).type.Name;
+            //var properties = listGeneric.ElementAt(0).type.GetProperties().ToList();
 
-            sql.Append("Insert Into ");
-            sql.Append(table);
-            sql.Append(" (");            
-            sql.Append(Generic.StringBuilderProperty(properties));
+        
 
             foreach (Generic generic in listGeneric)
             {
