@@ -8,6 +8,6 @@ namespace GenericExample
 {
     interface SQL
     {
-        void StringConstructor(List<Generic> listaGenerica );
+        String StringConstructor(List<Generic> listaGenerica );
     }
 }

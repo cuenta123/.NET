@@ -12,7 +12,7 @@ namespace GenericExample
     {
         StringBuilder sql;
 
-        public void StringConstructor(List<Generic> listGeneric)
+        public String StringConstructor(List<Generic> listGeneric)
         {
             if (listGeneric == null)
             {
@@ -28,6 +28,7 @@ namespace GenericExample
 
             StringBuilderProperty(listGeneric);
             StringBuilderValues(listGeneric);
+            return sql.ToString();
         }
 
         private void StringBuilderProperty( List<Generic> listGeneric)
@@ -61,6 +62,7 @@ namespace GenericExample
                     sql.Append(propertyinfo + ")");
                 }
             }
+            
         }
 
       
