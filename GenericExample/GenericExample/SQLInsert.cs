@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenericExample
 {
-    class SQLInsert : ISQL
+     class InsertSQLStringConstructor : ISQL
     {
         StringBuilder sql;
 
