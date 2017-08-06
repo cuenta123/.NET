@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GenericExample
 {
-    class SQLInsert : SQL
+    class SQLInsert : ISQL
     {
         StringBuilder sql;
 
-        public void StringConstructor(List<Generic> listGeneric)
+        public void SQLStringConstructor(List<Generic> listGeneric)
         {
             if (listGeneric == null)
             {
@@ -26,43 +26,32 @@ namespace GenericExample
             sql.Append(table);
             sql.Append(" (");
 
-            StringBuilderProperty(listGeneric);
-            StringBuilderValues(listGeneric);
+            SQLStringBuilderProperty(listGeneric);
+            SQLStringBuilderValues(listGeneric);
         }
 
-        private void StringBuilderProperty( List<Generic> listGeneric)
+        private void SQLStringBuilderProperty( List<Generic> listGeneric)
         {
-
-                int contador=0;
-                foreach(var property in listGeneric)
-                {
-                        PropertyInfo[] properties = listGeneric.ElementAt(contador).type.GetProperties();
-                        sql.Append(properties + ",");
-                        if (contador == listGeneric.Count()-1)
-                        {
-                            sql.Append(properties + ")");
-                        }
-                contador++;
+           
+            listGeneric.ForEach(num => { listGeneric.ElementAt(0).type.GetProperties(); sql.Append(","); });    
+            sql.Append(")");               
+              
                 }
-        }
+        
 
-        private void StringBuilderValues(List<Generic> listGeneric)
+        private void SQLStringBuilderValues(List<Generic> listGeneric)
         {
 
             int contador = 0;
             sql.Append(" Values (");
 
-            foreach (var property in listGeneric)
+            List<PropertyInfo> listapropiedades = listGeneric.ElementAt(contador).type.GetProperties().ToList();
+            foreach (var properties in listGeneric)
             {
-                PropertyInfo[] propertyinfo = listGeneric.ElementAt(contador).type.GetProperties();
-                sql.Append(propertyinfo + ",");
-                if (contador == listGeneric.Count() - 1)
-                {
-                    sql.Append(propertyinfo + ")");
-                }
+                listGeneric.ForEach(num => { contador++; listapropiedades.ElementAt(contador).GetValue(contador); sql.Append(","); });
+                contador = 0;
             }
+                sql.Append(")");     
         }
-
-      
     }
 }

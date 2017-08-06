@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GenericExample
 {
-    interface SQL
+    interface ISQL
     {
-        void StringConstructor(List<Generic> listaGenerica );
+        void SQLStringConstructor(List<Generic> listaGenerica );
     }
 }

@@ -24,8 +24,6 @@ namespace LinqExample2
             var listCMethod = listA.Except(listB).ToList();
             //Query Sintax
             var listCSintax = (from num in listA.Except(listB) select num).ToList(); 
-
-
         }
     }
 }
