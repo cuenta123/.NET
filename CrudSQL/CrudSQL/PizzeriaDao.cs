@@ -32,11 +32,11 @@ namespace CrudSQL
                  command = conexion.CreateCommand();
 
 
-                //Definicion de procedimiento
+               
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "Insert Into Pizzeria (Id, Descripcion) Values(@Id, @Descripcion)";
 
-                //Parametros a utilizar
+                
                 command.Parameters.Add(new SqlParameter("@Id", entity.type.GetProperties().GetValue(0)));
                 command.Parameters.Add(new SqlParameter("@Descripcion", entity.type.GetProperties().GetValue(1)));
 
@@ -82,11 +82,11 @@ namespace CrudSQL
                 command = conexion.CreateCommand();
 
 
-                //Definicion de procedimiento
+           
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "Delete From Pizzeria  Where @Id = Id";
 
-                //Parametros a utilizar
+                
                 command.Parameters.Add(new SqlParameter("@Id", idEntity));
 
                 command.ExecuteNonQuery();
@@ -132,11 +132,11 @@ namespace CrudSQL
                 command = conexion.CreateCommand();
 
 
-                //Definicion de procedimiento
+               
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "Select Descripcion From Pizzeria  Where @Id = Id";
 
-                //Parametros a utilizar
+              
                 command.Parameters.Add(new SqlParameter("@Id", idEntity));
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -201,11 +201,11 @@ namespace CrudSQL
                 command = conexion.CreateCommand();
 
 
-                //Definicion de procedimiento
+                
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "Update From Pizzeria (Descripcion = @Descripcion) Where @Id = Id";
 
-                //Parametros a utilizar
+                
                 command.Parameters.Add(new SqlParameter("@Descripcion", entity.type.GetProperties().GetValue(0)));
 
                 SqlDataReader reader = command.ExecuteReader();
